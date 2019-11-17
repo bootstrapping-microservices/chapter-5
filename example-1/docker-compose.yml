@@ -12,9 +12,10 @@ services:
       - ./video-streaming/src:/usr/src/app/src:z
       - ./video-streaming/videos:/usr/src/app/videos:z
     ports:
-     - "4001:80"
+      - "4001:80"
     environment:
-     - PORT=80
+      - PORT=80
+      - NODE_ENV=development
     restart: "no"
 
   history:
@@ -27,7 +28,8 @@ services:
       - /tmp/history/npm-cache:/root/.npm:z
       - ./history/src:/usr/src/app/src:z
     ports:
-     - "4002:80"
+      - "4002:80"
     environment:
       - PORT=80
+      - NODE_ENV=development
     restart: "no"

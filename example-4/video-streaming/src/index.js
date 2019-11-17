@@ -2,9 +2,6 @@ const express = require("express");
 const fs = require("fs");
 const amqp = require('amqplib');
 
-const app = express();
-const port = process.env.PORT && parseInt(process.env.PORT) || 3000;
-
 if (!process.env.RABBIT) {
     throw new Error("Please specify the name of the RabbitMQ host using environment variable RABBIT");
 }

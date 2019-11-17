@@ -1,7 +1,7 @@
 const express = require("express");
+const bodyParser = require("body-parser");
 const mongodb = require("mongodb");
 const amqp = require("amqplib");
-const bodyParser = require("body-parser");
 
 if (!process.env.DBHOST) {
     throw new Error("Please specify the databse host using environment variable DBHOST.");

@@ -4,7 +4,7 @@ const express = require("express");
 // Setup event handlers.
 //
 function setupHandlers(app) {
-    // ... THIS IS A STUB MICROSRVICE: SETUP YOUR HTTP ROUTES HERE ...
+    // ... THIS IS A STUB MICROSERVICE: SETUP YOUR HTTP ROUTES HERE ...
 }
 
 //

@@ -5,7 +5,7 @@ services:
     image: mongo:4.2.0
     container_name: db
     ports:
-     - "27017:27017"
+      - "27017:27017"
     expose:
       - "27017"
     restart: always
@@ -32,10 +32,11 @@ services:
       - ./video-streaming/src:/usr/src/app/src:z
       - ./video-streaming/videos:/usr/src/app/videos:z
     ports:
-     - "4001:80"
+      - "4001:80"
     environment:
-     - PORT=80
-     - RABBIT=amqp://guest:guest@rabbit:5672
+      - PORT=80
+      - RABBIT=amqp://guest:guest@rabbit:5672
+      - NODE_ENV=development
     depends_on:
       - rabbit
     restart: "no"
@@ -56,6 +57,7 @@ services:
       - RABBIT=amqp://guest:guest@rabbit:5672
       - DBHOST=mongodb://db:27017
       - DBNAME=history
+      - NODE_ENV=development
     depends_on:
       - db
       - rabbit
@@ -77,6 +79,7 @@ services:
       - RABBIT=amqp://guest:guest@rabbit:5672
       - DBHOST=mongodb://db:27017
       - DBNAME=recommendations
+      - NODE_ENV=development
     depends_on:
       - db
       - rabbit
