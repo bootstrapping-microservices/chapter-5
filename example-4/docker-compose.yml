@@ -11,7 +11,7 @@ services:
     restart: always
 
   rabbit:
-    image: rabbitmq:3-management
+    image: rabbitmq:3.8.1-management
     container_name: rabbit
     ports:
       - "5672:5672"
