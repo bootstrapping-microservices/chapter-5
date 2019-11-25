@@ -49,7 +49,7 @@ function connectRabbit() {
 //
 function setupHandlers(app, db, messageChannel) {
 
-    const historyCollection = db.collection("videos");
+    const videosCollection = db.collection("videos");
 
     // ... YOU CAN PUT HTTP ROUTES AND OTHER MESSAGE HANDLERS HERE ...
 
@@ -58,7 +58,7 @@ function setupHandlers(app, db, messageChannel) {
 
         const parsedMsg = JSON.parse(msg.content.toString()); // Parse the JSON message.
         
-        return historyCollection.insertOne({ videoPath: parsedMsg.videoPath }) // Record the "view" in the database.
+        return videosCollection.insertOne({ videoPath: parsedMsg.videoPath }) // Record the "view" in the database.
             .then(() => {
                 console.log("Acknowledging message was handled.");
                 

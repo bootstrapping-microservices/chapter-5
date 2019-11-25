@@ -28,11 +28,11 @@ function connectDb() {
 //
 function setupHandlers(app, db) {
 
-    const historyCollection = db.collection("videos");
+    const videosCollection = db.collection("videos");
 
     app.post("/viewed", (req, res) => { // Handle the "viewed" message via HTTP POST request.
         const videoPath = req.body.videoPath; // Read JSON body from HTTP request.
-        historyCollection.insertOne({ videoPath: videoPath }) // Record the "view" in the database.
+        videosCollection.insertOne({ videoPath: videoPath }) // Record the "view" in the database.
             .then(() => {
                 console.log(`Added video ${videoPath} to history.`);
                 res.sendStatus(200);
@@ -43,6 +43,24 @@ function setupHandlers(app, db) {
                 res.sendStatus(500);
             });
     });
+
+    app.get("/history", (req, res) => {
+        const skip = parseInt(req.query.skip);
+        const limit = parseInt(req.query.limit);
+        videosCollection.find()
+            .skip(skip)
+            .limit(limit)
+            .toArray()
+            .then(documents => {
+                res.json({ history: documents });
+            })
+            .catch(err => {
+                console.error(`Error retrieving history from database.`);
+                console.error(err && err.stack || err);
+                res.sendStatus(500);
+            });
+    });
+
 }
 
 //
