@@ -1,31 +1,38 @@
 const express = require("express");
 const fs = require("fs");
-const request = require("request");
+const http = require("http");
 
 //
 // Send the "viewed" to the history microservice.
 //
 function sendViewedMessage(videoPath) {
     const postOptions = { // Options to the HTTP POST request.
-        body: { 
-            videoPath: videoPath 
+        method: "POST", // Sets the request method as POST.
+        headers: {
+            "Content-Type": "application/json", // Sets the content type for the request's body.
         },
-        json: true
     };
 
-    request.post( // Send the "viewed" message to the history microservice.
+    const requestBody = { // Body of the HTTP POST request.
+        videoPath: videoPath 
+    };
+
+    const req = http.request( // Send the "viewed" message to the history microservice.
         "http://history/viewed",
-        postOptions,
-        (err, res) => {
-            if (err)  {
-                console.error("Failed to send 'viewed' message!");
-                console.error(err && err.stack || err);
-            }
-            else {
-                console.log("Sent 'viewed' message to history microservice.");
-            }
-        }
+        postOptions
     );
+
+    req.on("close", () => {
+        console.log("Sent 'viewed' message to history microservice.");
+    });
+
+    req.on("error", (err) => {
+        console.error("Failed to send 'viewed' message!");
+        console.error(err && err.stack || err);
+    });
+
+    req.write(JSON.stringify(requestBody)); // Write the body to the request.
+    req.end(); // End the request.
 }
 
 //
