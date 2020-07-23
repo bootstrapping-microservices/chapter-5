@@ -5,9 +5,7 @@ services:
     image: mongo:4.2.8
     container_name: db
     ports:
-      - "27017:27017"
-    expose:
-      - "27017"
+      - "4000:27017"
     restart: always
 
   rabbit:
