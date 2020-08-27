@@ -68,7 +68,7 @@ function setupHandlers(app, db, messageChannel) {
 
     return messageChannel.assertExchange("viewed", "fanout") // Assert that we have a "viewed" exchange.
         .then(() => {
-            return messageChannel.assertQueue("", {}); // Create an anonyous queue.
+            return messageChannel.assertQueue("", { exclusive: true }); // Create an anonyous queue.
         })
         .then(response => {
             const queueName = response.queue;
