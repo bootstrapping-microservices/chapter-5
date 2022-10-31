@@ -1,6 +1,6 @@
 # Example-2
 
-Example number 2 from Chapter 5 of [Bootstrapping Microservices](http://bit.ly/2o0aDsP).
+Example number 2 from Chapter 5 of [Bootstrapping Microservices](https://www.bootstrapping-microservices.com).
 
 In Chapter 5 of Bootstrapping Microservices you learn how to make microservices talk to each other with HTTP requests and RabbitMQ messages.
 
